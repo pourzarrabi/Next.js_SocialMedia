@@ -44,22 +44,7 @@ const PostInteraction = ({
   };
 
   return (
-    <div className='flex items-center justify-between my-4'>
-      <div className=''>
-        <div className='flex items-center gap-4 bg-slate-50 p-2 rounded-xl'>
-          <span className='text-gray-500'>
-            <span className='hidden md:inline'>اشتراک</span>
-          </span>
-          <span className='text-gray-300'>|</span>
-          <Image
-            src='/share.png'
-            alt=''
-            width={16}
-            height={16}
-            className='cursor-pointer'
-          />
-        </div>
-      </div>
+    <div className='flex items-center justify-end my-4'>
       <div className='flex gap-2'>
         <div className='flex items-center gap-4 bg-slate-50 p-2 rounded-xl'>
           <span className='text-gray-500'>

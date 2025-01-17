@@ -1,9 +1,19 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { useClerk, SignedOut, SignedIn } from "@clerk/nextjs";
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { signOut } = useClerk();
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <div className='md:hidden'>
@@ -28,12 +38,20 @@ const MobileMenu = () => {
         />
       </div>
       {isOpen && (
-        <div className='absolute left-0 top-24 w-full h-[calc(100vh-96px)] bg-white flex flex-col items-center justify-center gap-8 font-medium text-xl z-10'>
-          <Link href='/'>خانه</Link>
-          <Link href='/'>دوستان</Link>
-          <Link href='/'>گروه</Link>
-          <Link href='/'>داستان</Link>
-          <Link href='/'>ورود</Link>
+        <div className='absolute left-0 top-24 w-full h-[calc(100vh-96px)] bg-white flex flex-col items-center justify-center gap-8 font-medium text-xl z-50'>
+          <Link href='/' onClick={handleLinkClick}>
+            خانه
+          </Link>
+          <SignedIn>
+            <button
+              onClick={() => {
+                handleSignOut();
+                handleLinkClick();
+              }}
+            >
+              خروج
+            </button>
+          </SignedIn>
         </div>
       )}
     </div>

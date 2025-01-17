@@ -8,16 +8,17 @@ import {
   SignedIn,
   UserButton,
 } from "@clerk/nextjs";
+import SearchBox from "./SearchBox";
 
 const Navbar = () => {
   return (
     <div className='flex items-center justify-between h-24 dir-rtl'>
-      <div className='md:hidden lg:block w-[20%]'>
+      <div className='max-md:hidden lg:block '>
         <Link href='/' className='font-bold text-2xl text-blue-600'>
           یکتا
         </Link>
       </div>
-      <div className='hidden md:flex w-[50%] items-center justify-between'>
+      <div className='hidden md:flex items-center justify-between'>
         <div className='flex gap-6 text-gray-600'>
           <Link href='/' className='flex gap-2 items-center '>
             <Image
@@ -50,17 +51,10 @@ const Navbar = () => {
             <span>داستان</span>
           </Link>
         </div>
-        <div className='hidden xl:flex p-2 bg-slate-100 items-center rounded-xl'>
-          <input
-            type='text'
-            placeholder='جستجو...'
-            className='bg-transparent outline-none'
-          />
-          <Image src='/search.png' alt='' width={14} height={14} />
-        </div>
       </div>
-      <div className='dir-ltr w-[30%] flex items-center gap-4 xl:gap-8 justify-start'>
-        <MobileMenu />
+      <SearchBox />
+      <MobileMenu />
+      <div className='dir-ltr hidden md:flex items-center gap-4 xl:gap-8 justify-start'>
         <ClerkLoading>
           <div className='inline-block h-4 w-4 animate-spin rounded-full border-2 border-gray-500 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white' />
         </ClerkLoading>

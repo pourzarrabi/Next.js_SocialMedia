@@ -20,7 +20,10 @@ const StoryList = ({
 
   const [optimisticStories, addOptimisticStories] = useOptimistic(
     storyList,
-    (prev, value: StoryWithUser) => [value, ...prev]
+    (prev, value: StoryWithUser) => [
+      value,
+      ...prev.filter((s) => s.user.id !== currentUser.id),
+    ]
   );
 
   const add = async () => {
@@ -39,7 +42,10 @@ const StoryList = ({
 
     try {
       const createdStory = await addStory(image.secure_url);
-      setStoryList((prev) => [createdStory, ...prev]);
+      setStoryList((prev) => [
+        createdStory,
+        ...prev.filter((s) => s.user.id !== currentUser.id),
+      ]);
       setImage(null);
     } catch (error) {
       console.log(error);
@@ -64,7 +70,6 @@ const StoryList = ({
                 width={80}
                 height={80}
                 className='w-20 h-20 rounded-full ring-2 object-cover'
-                onClick={() => open()}
               />
               {image ? (
                 <form action={add}>
@@ -73,9 +78,16 @@ const StoryList = ({
                   </button>
                 </form>
               ) : (
-                <span className='font-medium text-sm'>استوری</span>
+                <span className='font-medium text-sm text-blue-500'>
+                  داستان
+                </span>
               )}
-              <div className='absolute text-6xl text-gray-300 top-3'>+</div>
+              <div
+                className='absolute text-6xl text-gray-300 top-3'
+                onClick={() => open()}
+              >
+                +
+              </div>
             </div>
           );
         }}
@@ -92,7 +104,7 @@ const StoryList = ({
             height={80}
             className='w-20 h-20 rounded-full ring-2 object-cover'
           />
-          <span className='font-medium'>
+          <span className='text-sm font-medium'>
             {s.user.firstName || s.user.username}
           </span>
         </div>

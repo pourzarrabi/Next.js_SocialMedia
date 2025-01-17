@@ -94,32 +94,8 @@ const CommentList = ({
                 ? c.user.firstName + " " + c.user.lastName
                 : c.user.username}
             </span>
-            <p>{c.desc}</p>
-            <div className='flex items-center gap-8 text-gray-500 mt-2 justify-end'>
-              <div className=''>پاسخ</div>
-
-              <div className='flex items-center gap-4'>
-                <span className='text-gray-500'>
-                  0<span className='hidden md:inline'> پسند</span>
-                </span>
-                <span className='text-gray-300'>|</span>
-                <Image
-                  src='/like.png'
-                  alt=''
-                  width={12}
-                  height={12}
-                  className='cursor-pointer w-3 h-3'
-                />
-              </div>
-            </div>
+            <p className='text-gray-500'>{c.desc}</p>
           </div>
-          <Image
-            src='/more.png'
-            alt=''
-            width={16}
-            height={16}
-            className='cursor-pointer w-4 h-4'
-          />
         </div>
       ))}
     </>

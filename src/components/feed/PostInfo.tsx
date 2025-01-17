@@ -18,7 +18,7 @@ const PostInfo = ({ postId }: { postId: number }) => {
         className='cursor-pointer'
       />
       {open && (
-        <div className='absolute top-4 right-0 bg-white p-4 rounded-lg flex flex-col gap-2 text-xs shadow-lg z-30'>
+        <div className='absolute left-0 bg-white p-4 rounded-lg flex flex-col gap-2 text-xs shadow-lg z-30'>
           <form action={deletePostWithId}>
             <button className='text-red-500 font-medium'>حذف</button>
           </form>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const Birthdays = () => {
+const Birthdays = async () => {
   return (
     <div className='p-4 bg-white rounded-lg shadow-md flex flex-col gap-4'>
       <div className='flex items-center justify-between font-medium'>

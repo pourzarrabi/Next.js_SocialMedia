@@ -53,12 +53,8 @@ const UserInfoCard = async ({ user }: { user: User }) => {
     <div className='p-4 bg-white rounded-lg shadow-md flex flex-col gap-4'>
       <div className='flex items-center justify-between font-medium'>
         <span className='text-gray-500 text-sm'>اطلاعات کاربری</span>
-        {currentUserId && currentUserId === user.id ? (
+        {currentUserId && currentUserId === user.id && (
           <UpdateUser user={user} />
-        ) : (
-          <Link href='/' className='text-blue-500 text-sm'>
-            همه
-          </Link>
         )}
       </div>
       <div className='flex flex-col gap-4 text-gray-500'>

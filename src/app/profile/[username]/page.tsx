@@ -1,9 +1,11 @@
 import Feed from "@/components/feed/Feed";
 import LeftMenu from "@/components/leftMenu/LeftMenu";
+import UserInfoCard from "@/components/leftMenu/UserInfoCard";
 import RightMenu from "@/components/rightMenu/RightMenu";
 import prisma from "@/lib/client";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const page = async ({ params }: { params: { username: string } }) => {
@@ -45,7 +47,7 @@ const page = async ({ params }: { params: { username: string } }) => {
   if (isBlocked) return notFound();
 
   return (
-    <div className='dir-rtl flex gap-6 pt-6'>
+    <div className='dir-rtl flex gap-6 mt-6 mb-10'>
       <div className='hidden xl:block w-[20%]'>
         <RightMenu type='profile' />
       </div>
@@ -72,21 +74,36 @@ const page = async ({ params }: { params: { username: string } }) => {
                 ? user.firstName + " " + user.lastName
                 : user.username}
             </h1>
-            <div className='flex items-center mb-4'>
-              <div className='flex flex-col items-center min-w-[150px]'>
-                <span className='font-medium'>{user._count.posts}</span>
-                <span className='text-sm'>پست</span>
+            <div className='flex items-center justify-between mb-4 gap-2'>
+              <div className='flex flex-col items-center min-w-[100px] border border-slate-300 rounded-lg shadow-sm bg-slate-50 p-1 '>
+                <p className='font-medium text-blue-500'>{user._count.posts}</p>
+                <p className='text-sm text-gray-500'>پست</p>
               </div>
-              <div className='flex flex-col items-center min-w-[150px]'>
-                <span className='font-medium'>{user._count.followers}</span>
-                <span className='text-sm'>دنبال کننده</span>
+              <div className='flex flex-col items-center min-w-[100px] border border-slate-300 rounded-lg shadow-sm bg-slate-50 p-1 '>
+                <p className='font-medium text-blue-500'>
+                  {user._count.followers}
+                </p>
+                <Link
+                  href={`/profile/${user.username}/followers`}
+                  className='text-sm text-gray-500'
+                >
+                  دنبال کننده
+                </Link>
               </div>
-              <div className='flex flex-col items-center min-w-[150px]'>
-                <span className='font-medium'>{user._count.followings}</span>
-                <span className='text-sm'>دنبال شده</span>
+              <div className='flex flex-col items-center min-w-[100px] border border-slate-300 rounded-lg shadow-sm bg-slate-50 p-1 '>
+                <p className='font-medium text-blue-500'>
+                  {user._count.followings}
+                </p>
+                <Link
+                  href={`/profile/${user.username}/followings`}
+                  className='text-sm text-gray-500'
+                >
+                  دنبال شده
+                </Link>
               </div>
             </div>
           </div>
+          <UserInfoCard user={user} />
           <Feed username={user.username} />
         </div>
       </div>

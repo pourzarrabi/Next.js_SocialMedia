@@ -4,6 +4,7 @@ import { Post as PostType, User } from "@prisma/client";
 import PostInteraction from "./PostInteraction";
 import { auth } from "@clerk/nextjs/server";
 import PostInfo from "./PostInfo";
+import ImageModal from "./ImageModal";
 
 type FeedPostType = PostType & { user: User } & {
   likes: [{ userId: string }];
@@ -34,16 +35,7 @@ const Post = async ({ post }: { post: FeedPostType }) => {
         {currentUserId === post.user.id && <PostInfo postId={post.id} />}
       </div>
       <div className='flex flex-col gap-4'>
-        {post.img && (
-          <div className='w-full min-h-96 relative'>
-            <Image
-              src={post.img}
-              alt=''
-              fill
-              className='object-cover rounded-md'
-            />
-          </div>
-        )}
+        {post.img && <ImageModal imgSrc={post.img} />}
         <p>{post.desc}</p>
       </div>
       <PostInteraction
