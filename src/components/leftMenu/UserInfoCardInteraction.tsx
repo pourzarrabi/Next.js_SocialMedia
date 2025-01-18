@@ -6,18 +6,18 @@ import { useOptimistic, useState } from "react";
 const UserInfoCardInteraction = ({
   userId,
   isUserBlocked,
-  isFollowing,
-  isFollowingSent,
+  isFollowed,
+  isFollowSent,
 }: {
   userId: string;
   isUserBlocked: boolean;
-  isFollowing: boolean;
-  isFollowingSent: boolean;
+  isFollowed: boolean;
+  isFollowSent: boolean;
 }) => {
   const [userState, setUserState] = useState({
     userBlocked: isUserBlocked,
-    following: isFollowing,
-    followingSent: isFollowingSent,
+    followed: isFollowed,
+    followSent: isFollowSent,
     isFollowSending: false,
     isBlockSending: false,
   });
@@ -28,8 +28,8 @@ const UserInfoCardInteraction = ({
       await switchFollow(userId);
       setUserState((prev) => ({
         ...prev,
-        following: prev.following && false,
-        followingSent: !prev.following && !prev.followingSent ? true : false,
+        followed: prev.followed && false,
+        followSent: !prev.followed && !prev.followSent ? true : false,
       }));
     } catch (error) {
       console.log(error);
@@ -55,9 +55,8 @@ const UserInfoCardInteraction = ({
       value === "follow"
         ? {
             ...prev,
-            following: prev.following && false,
-            followingSent:
-              !prev.following && !prev.followingSent ? true : false,
+            followed: prev.followed && false,
+            followSent: !prev.followed && !prev.followSent ? true : false,
             isFollowSending: true,
           }
         : {
@@ -76,9 +75,9 @@ const UserInfoCardInteraction = ({
         >
           {optimisticState.isFollowSending
             ? "ارسال..."
-            : optimisticState.following
+            : optimisticState.followed
             ? "دنبال شده"
-            : optimisticState.followingSent
+            : optimisticState.followSent
             ? "درخواست شده"
             : "دنبال کردن"}
         </button>

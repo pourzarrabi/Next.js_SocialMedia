@@ -1,5 +1,6 @@
 import AddPost from "@/components/AddPost";
 import Feed from "@/components/feed/Feed";
+import FriendRequests from "@/components/FriendRequests";
 import LeftMenu from "@/components/leftMenu/LeftMenu";
 import ProfileCard from "@/components/rightMenu/ProfileCard";
 import RightMenu from "@/components/rightMenu/RightMenu";
@@ -16,6 +17,7 @@ const Homepage = () => {
           <div className='md:hidden'>
             <ProfileCard />
           </div>
+          <FriendRequests />
           <Stories />
           <AddPost />
           <Feed />

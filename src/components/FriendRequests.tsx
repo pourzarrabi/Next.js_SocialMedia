@@ -1,6 +1,5 @@
 import prisma from "@/lib/client";
 import { auth } from "@clerk/nextjs/server";
-import Link from "next/link";
 import FriendRequestList from "./FriendRequestList";
 
 const FriendRequests = async () => {
@@ -22,9 +21,6 @@ const FriendRequests = async () => {
     <div className='p-4 bg-white rounded-lg shadow-md flex flex-col gap-4'>
       <div className='flex items-center justify-between font-medium'>
         <span className='text-gray-500 text-sm'>درخواست دوستی</span>
-        <Link href='/' className='text-blue-500 text-sm'>
-          همه
-        </Link>
       </div>
       <FriendRequestList requests={requests} />
     </div>

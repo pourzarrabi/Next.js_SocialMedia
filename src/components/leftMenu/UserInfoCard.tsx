@@ -15,8 +15,8 @@ const UserInfoCard = async ({ user }: { user: User }) => {
   });
 
   let isUserBlocked = false;
-  let isFollowing = false;
-  let isFollowingSent = false;
+  let isFollowed = false;
+  let isFollowSent = false;
 
   const { userId: currentUserId } = await auth();
 
@@ -30,14 +30,18 @@ const UserInfoCard = async ({ user }: { user: User }) => {
 
     blockRes ? (isUserBlocked = true) : (isUserBlocked = false);
 
-    const followingRes = await prisma.follow.findFirst({
+    const followedRes = await prisma.user.findFirst({
       where: {
-        followerId: currentUserId,
-        followingId: user.id,
+        id: currentUserId,
+        followings: {
+          some: {
+            followerId: user.id,
+          },
+        },
       },
     });
 
-    followingRes ? (isFollowing = true) : (isFollowing = false);
+    followedRes ? (isFollowed = true) : (isFollowed = false);
 
     const followingSentRes = await prisma.followRequest.findFirst({
       where: {
@@ -46,7 +50,7 @@ const UserInfoCard = async ({ user }: { user: User }) => {
       },
     });
 
-    followingSentRes ? (isFollowingSent = true) : (isFollowingSent = false);
+    followingSentRes ? (isFollowSent = true) : (isFollowSent = false);
   }
 
   return (
@@ -107,8 +111,8 @@ const UserInfoCard = async ({ user }: { user: User }) => {
           <UserInfoCardInteraction
             userId={user.id}
             isUserBlocked={isUserBlocked}
-            isFollowing={isFollowing}
-            isFollowingSent={isFollowingSent}
+            isFollowed={isFollowed}
+            isFollowSent={isFollowSent}
           />
         )}
       </div>

@@ -12,17 +12,28 @@ export const switchFollow = async (userId: string) => {
   }
 
   try {
-    const existedFollow = await prisma.follow.findFirst({
+    const existedFollow = await prisma.user.findFirst({
       where: {
-        followerId: currentUserId,
-        followingId: userId,
+        id: currentUserId,
+        followings: {
+          some: {
+            followerId: userId,
+          },
+        },
       },
     });
 
     if (existedFollow) {
-      await prisma.follow.delete({
+      await prisma.user.update({
         where: {
-          id: existedFollow.id,
+          id: currentUserId,
+        },
+        data: {
+          followings: {
+            deleteMany: {
+              followerId: userId,
+            },
+          },
         },
       });
     } else {
