@@ -9,10 +9,13 @@ import {
   SignedOut,
   SignedIn,
   UserButton,
+  useUser,
 } from "@clerk/nextjs";
 import SearchBox from "./SearchBox";
 
 const Navbar = () => {
+  const { user: currentUser } = useUser();
+
   return (
     <div className='flex items-center justify-between h-24 dir-rtl'>
       <div className='max-md:hidden lg:block '>
@@ -54,7 +57,14 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <SearchBox />
+      {currentUser ? (
+        <SearchBox />
+      ) : (
+        <Link href='/' className='font-bold text-2xl text-blue-600'>
+          یکتا
+        </Link>
+      )}
+
       <MobileMenu />
       <div className='dir-ltr hidden md:flex items-center gap-4 xl:gap-8 justify-start'>
         <ClerkLoading>

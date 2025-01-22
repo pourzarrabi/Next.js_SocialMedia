@@ -44,7 +44,7 @@ const UpdateUser = ({ user }: { user: User }) => {
   return (
     <div>
       <span
-        className='text-blue-500 text-sm cursor-pointer font-medium'
+        className='text-blue-500 text-sm cursor-pointer font-medium max-sm:hidden'
         onClick={handleOpen}
       >
         ویرایش
@@ -57,10 +57,8 @@ const UpdateUser = ({ user }: { user: User }) => {
             }
             className='relative p-12 bg-white rounded-lg shadow-md flex flex-col gap-2 w-full md:w-1/2 xl:w-1/3'
           >
-            <h1>ویرایش پروفایل</h1>
-            <div className='mt-4 text-xs text-gray-500'>
-              برای ویرایش پروفایل، در قسمت بالا روی عکس خود کلیک نمایید.
-            </div>
+            <h1 className='text-blue-500'>ویرایش پروفایل</h1>
+
             <CldUploadWidget
               uploadPreset='yektaSocial'
               onSuccess={(res) => setCover(res.info)}
@@ -73,13 +71,6 @@ const UpdateUser = ({ user }: { user: User }) => {
                   >
                     <label htmlFor=''>عکس زمینه</label>
                     <div className='flex items-center gap-2 cursor-pointer'>
-                      <Image
-                        src={cover?.secure_url || user.cover || "/noCover.png"}
-                        alt=''
-                        width={48}
-                        height={32}
-                        className='w-12 h-8 rounded-md object-cover'
-                      />
                       <span className='text-xs text-blue-500'>تغییر عکس</span>
                     </div>
                   </div>
